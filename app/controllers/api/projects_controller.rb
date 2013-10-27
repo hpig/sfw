@@ -1,51 +1,47 @@
 class Api::ProjectsController < ApplicationController
+  before_action :set_project, only: [:show, :update, :destroy]
 
+  # GET /api/projects
   def index
-    #@projects = Project.all
     render json: Project.all
   end
 
+  # GET /api/projects/23
   def show
-    #@project = Project.find(params[:id])
-    render json: Project.find(params[:id])
+    render json: @project
   end
 
-  def new
-    @project = Project.new
-  end
-
+  # POST /api/projects
   def create
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to @project
+      render json: @project, status: :ok
     else
-      render 'new'
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @project = Project.find(params[:id])
-  end
-
+  # PATCH/PUT /api/projects/23
   def update
-    @project = Project.find(params[:id])
-
     if @project.update(project_params)
-      redirect_to @project
+      head :no_content
     else
-      render 'edit'
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
 
+  # DELETE /api/projects/23
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
-
-    redirect_to projects_path
+    head :no_content
   end
 
 private
+
+  def set_project()
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name)

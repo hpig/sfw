@@ -1,10 +1,16 @@
 .row
   .col-md-6
-    p
-      | {{projects.length}} projects:
-    ul
-      li ng-repeat="project in projects"
-        a href="/#/projects/{{project.id}}"
-          | {{project.name}}
+    .well
+      p
+        | {{projects.length}} projects:
+        .well ng-repeat="project in projects | orderBy:'name'"
+          a href="/#/projects/{{project.id}}"
+            | {{project.name}}
+          button.btn.btn-xs.btn-danger.pull-right ng-click="delete($index)" Delete
+      form ng-submit="create(name)"
+        .input-group
+          input.form-control[ng-model="name" type="text" placeholder="Name..." required]
+          span.input-group-btn
+            button.btn.btn-primary type="submit" Add Project
   .col-md-6
     = image_tag "logo.png"

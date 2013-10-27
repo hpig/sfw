@@ -1,5 +1,9 @@
 app = angular.module 'sfw', ['ngResource']
 
+app.config ($httpProvider) ->
+  authToken = $("meta[name=\"csrf-token\"]").attr("content")
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+
 app.config ($routeProvider, $locationProvider) ->
   #$locationProvider.html5Mode true
   $routeProvider.when '/', redirectTo: '/projects/'

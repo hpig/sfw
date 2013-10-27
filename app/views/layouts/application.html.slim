@@ -23,7 +23,7 @@ html ng-app="sfw"
                 | Projects
                 b.caret
               ul.dropdown-menu ng-controller="ProjectsCtrl"
-                li ng-repeat="project in projects"
+                li ng-repeat="project in projects | orderBy:'name'"
                   a href="/#/projects/{{project.id}}"
                     | {{project.name}}
     / page content
