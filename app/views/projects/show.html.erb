@@ -3,7 +3,7 @@
   <%= @project.name %>
 </p>
 
-<h2>Add a comment:</h2>
+<h2>Add a sprint:</h2>
 <%= form_for([@project, @project.sprints.build]) do |f| %>
   <p>
     <%= f.label :begin_date %>

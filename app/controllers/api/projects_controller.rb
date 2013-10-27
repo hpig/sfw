@@ -1,11 +1,13 @@
-class ProjectsController < ApplicationController
+class Api::ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all
+    #@projects = Project.all
+    render json: Project.all
   end
 
   def show
-    @project = Project.find(params[:id])
+    #@project = Project.find(params[:id])
+    render json: Project.find(params[:id])
   end
 
   def new

@@ -4,7 +4,9 @@ Sfw::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'projects#index'
+  root 'application#index'
+
+  #get 'application/index' => layouts#application
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -14,8 +16,12 @@ Sfw::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :projects do
-    resources :sprints
+  resources :angular, only: [:show]
+
+  namespace :api, defaults: {format: :json} do
+    resources :projects do
+      resources :sprints
+    end
   end
 
   # Example resource route with options:
@@ -43,7 +49,7 @@ Sfw::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

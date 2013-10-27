@@ -32,6 +32,13 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'slim-rails'
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 0.2.3'
+#gem 'stylus'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
