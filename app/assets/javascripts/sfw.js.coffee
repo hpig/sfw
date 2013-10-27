@@ -6,9 +6,21 @@ app.config ($httpProvider) ->
 
 app.config ($routeProvider, $locationProvider) ->
   #$locationProvider.html5Mode true
-  $routeProvider.when '/', redirectTo: '/projects/'
-  $routeProvider.when '/projects/', templateUrl: '/angular/projects', controller: 'ProjectsCtrl'
-  $routeProvider.when '/projects/:project_id/', templateUrl: '/angular/sprints', controller: 'SprintsCtrl'
+
+  $routeProvider.when '/',
+    redirectTo: '/projects/'
+
+  $routeProvider.when '/projects/',
+    templateUrl: '/angular/app',
+    controller: 'ProjectsCtrl'
+
+  $routeProvider.when '/projects/:project_id/',
+   templateUrl: '/angular/project',
+   controller: 'SprintsCtrl'
+
+  $routeProvider.when '/projects/:project_id/:sprint_id/',
+    templateUrl: '/angular/sprint',
+    controller: 'StoriesCtrl'
 
 # Makes AngularJS work with turbolinks.
 $(document).on 'page:load', ->

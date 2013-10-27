@@ -39,7 +39,7 @@ class Api::ProjectsController < ApplicationController
 
 private
 
-  def set_project()
+  def set_project
     @project = Project.find(params[:id])
   end
 

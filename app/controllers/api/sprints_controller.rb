@@ -5,7 +5,7 @@ class Api::SprintsController < ApplicationController
 
   # GET /api/projects/23/sprints
   def index
-    render json: @project.sprints.all
+    render json: @project.sprints
   end
 
   # GET /api/projects/23/sprints/42
@@ -26,7 +26,7 @@ class Api::SprintsController < ApplicationController
 
   # PATCH/PUT /api/projects/23/sprints/42
   def update
-    if @sprint.update(project_params)
+    if @sprint.update(sprint_params)
       head :no_content
     else
       render json: @sprint.errors, status: :unprocessable_entity
@@ -41,11 +41,11 @@ class Api::SprintsController < ApplicationController
 
 private
 
-  def set_project()
+  def set_project
     @project = Project.find(params[:project_id])
   end
 
-  def set_sprint()
+  def set_sprint
     @sprint = @project.sprints.find(params[:id])
   end
 

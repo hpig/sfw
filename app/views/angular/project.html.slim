@@ -1,0 +1,31 @@
+p
+  | Sprints for
+  b<
+    | {{project.name}}
+
+form.well ng-submit="create(begin_date, end_date)"
+  .row
+    .col-md-3.input-group
+      span.input-group-addon Begin
+      input.form-control[ng-model="begin_date" type="date" required]
+    .col-md-3.input-group
+      span.input-group-addon End
+      input.form-control[ng-model="end_date" type="date" required]
+    .col-md-2
+      button.btn.btn-primary type="submit" Add Sprint
+
+.well ng-repeat="sprint in sprints | orderBy:'begin_date'"
+  .row
+    .col-md-1
+      a href="/#/projects/{{project.id}}/{{sprint.id}}" Show
+    .col-md-3.input-group
+      span.input-group-addon Begin
+      input.form-control[type="date" value="{{sprint.begin_date}}" required]
+    .col-md-3.input-group
+      span.input-group-addon End
+      input.form-control[type="date" value="{{sprint.end_date}}" required]
+    .col-md-5
+      button.btn.btn-xs.btn-danger.pull-right ng-click="delete($index)" Delete
+
+  / collection of stories
+  div ng-include="'/angular/sprint'" ng-controller="StoriesCtrl"
