@@ -1,16 +1,22 @@
-.row
-  .col-md-6
-    .well
-      p
-        | {{projects.length}} projects:
-        .well ng-repeat="project in projects | orderBy:'name'"
-          a href="/#/projects/{{project.id}}"
-            | {{project.name}}
-          button.btn.btn-xs.btn-danger.pull-right ng-click="delete($index)" Delete
-      form ng-submit="create(name)"
-        .input-group
-          input.form-control[ng-model="name" type="text" placeholder="Name..." required]
-          span.input-group-btn
-            button.btn.btn-primary type="submit" Add Project
-  .col-md-6
-    = image_tag "logo.png"
+.container
+  .row
+    .col-md-6
+      .panel.panel-primary
+
+        .panel-heading
+          | {{projects.length}} projects
+
+        ul.list-group
+          li.list-group-item ng-repeat="project in projects | orderBy:'name'"
+            a href="/#/projects/{{project.id}}"
+              | {{project.name}}
+            button.btn.btn-xs.btn-danger.pull-right ng-click="deleteProject(project.id)" Delete
+
+        form ng-submit="createProject(name)"
+          .input-group
+            input.form-control[ng-model="name" type="text" placeholder="Name..." required]
+            span.input-group-btn
+              button.btn.btn-primary type="submit" Add Project
+
+    .col-md-6
+      = image_tag "logo.png"

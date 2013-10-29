@@ -10,17 +10,15 @@ app.config ($routeProvider, $locationProvider) ->
   $routeProvider.when '/',
     redirectTo: '/projects/'
 
+  # route to overview & management of all projects
   $routeProvider.when '/projects/',
     templateUrl: '/angular/app',
     controller: 'ProjectsCtrl'
 
+  # route to specific project
   $routeProvider.when '/projects/:project_id/',
    templateUrl: '/angular/project',
    controller: 'SprintsCtrl'
-
-  $routeProvider.when '/projects/:project_id/:sprint_id/',
-    templateUrl: '/angular/sprint',
-    controller: 'StoriesCtrl'
 
 # Makes AngularJS work with turbolinks.
 $(document).on 'page:load', ->

@@ -1,9 +1,9 @@
-p
+h3
   | Sprints for
   b<
     | {{project.name}}
 
-form.well ng-submit="create(begin_date, end_date)"
+form.well ng-submit="createSprint(begin_date, end_date)"
   .row
     .col-md-3.input-group
       span.input-group-addon Begin
@@ -25,6 +25,6 @@ form.well ng-submit="create(begin_date, end_date)"
       span.input-group-addon End
       input.form-control[type="date" value="{{sprint.end_date}}" required]
     .col-md-5
-      button.btn.btn-xs.btn-danger.pull-right ng-click="delete($index)" Delete
+      button.btn.btn-xs.btn-danger.pull-right ng-click="deleteSprint(sprint.id)" Delete
 
-  div ng-include="'/angular/sprint'" ng-controller="StoriesCtrl"
+  div ng-include="'/angular/sprint'" ng-controller="StoriesCtrl" ng-init="initStory(sprint.id)"

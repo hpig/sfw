@@ -7,15 +7,16 @@ app = angular.module 'sfw'
 #]
 
 app.factory 'Project', ($resource) ->
-  $resource '/api/projects/:project_id', project_id: '@project_id'
+  $resource '/api/projects/:project_id', project_id: '@id'
 
 app.controller 'ProjectsCtrl', @ProjectsCtrl = ($scope, Project) ->
-  $scope.projects = Project.query()
+  Project.query (projects) ->
+    $scope.projects = projects
 
-  $scope.create = (name) ->
+  $scope.createProject = (name) ->
     Project.save name: name, (project) ->
       $scope.projects.push project
 
-  $scope.delete = (index) ->
-    Project.delete project_id: $scope.projects[index].id, () ->
-      $scope.projects.splice index, 1
+  $scope.deleteProject = (id) ->
+    Project.delete project_id: id, () ->
+      $scope.projects = (p for p in $scope.projects when p.id != id)

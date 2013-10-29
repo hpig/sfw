@@ -2,20 +2,26 @@ app = angular.module 'sfw'
 
 app.factory 'Story', ($resource) ->
   $resource '/api/projects/:project_id/sprints/:sprint_id/stories/:story_id',
-            project_id: '@project_id', sprint_id: '@sprint_id', story_id: '@story_id'
+            project_id: '@project_id', sprint_id: '@sprint_id', story_id: '@id'
 
-app.controller 'StoriesCtrl', @StoriesCtrl = ($scope, $routeParams, Project, Sprint, Story) ->
-  project_id = $routeParams.project_id
-  sprint_id = $routeParams.sprint_id
+app.controller 'StoriesCtrl', @StoriesCtrl = ($scope, Sprint, Story) ->
+  $scope.initStory = (sprint_id) ->
+    Sprint.get project_id: $scope.project.id, sprint_id: sprint_id, (sprint) ->
+      $scope.sprint = sprint
 
-  $scope.story_project = Project.get project_id: project_id
-  $scope.story_sprint = Sprint.get sprint_id: sprint_id
-  $scope.stories = Story.query sprint_id: sprint_id
+  Story.query project_id: $scope.project.id, sprint_id: $scope.sprint.id, (stories) ->
+    $scope.stories = stories
 
-  $scope.create = (begin_date, end_date) ->
-    Story.save sprint_id: sprint_id, name: name, description: description, points: points, (story) ->
-      $scope.stories.push story
+  $scope.createStory = (name, description, points) ->
+    Story.save
+      project_id: $scope.project.id,
+      sprint_id: $scope.sprint.id,
+      name: name, description: description, points: points, (story) ->
+        $scope.stories.push story
 
-  $scope.delete = (index) ->
-    Story.delete sprint_id: sprint_id, story_id: $scope.stories[index].id, () ->
-      $scope.stories.splice index, 1
+  $scope.deleteStory = (id) ->
+    Story.delete
+      project_id: $scope.project.id,
+      sprint_id: $scope.sprint.id,
+      story_id: id, () ->
+        $scope.sprints = (s for s in $scope.sprints when s.id != id)

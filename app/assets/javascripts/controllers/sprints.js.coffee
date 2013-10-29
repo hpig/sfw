@@ -1,18 +1,21 @@
 app = angular.module 'sfw'
 
 app.factory 'Sprint', ($resource) ->
-  $resource '/api/projects/:project_id/sprints/:sprint_id/', project_id: '@project_id', sprint_id: '@sprint_id'
+  $resource '/api/projects/:project_id/sprints/:sprint_id/', project_id: '@project_id', sprint_id: '@id'
 
 app.controller 'SprintsCtrl', @SprintsCtrl = ($scope, $routeParams, Project, Sprint) ->
   project_id = $routeParams.project_id
 
-  $scope.project = Project.get project_id: project_id
-  $scope.sprints = Sprint.query project_id: project_id
+  Project.get project_id: project_id, (project) ->
+    $scope.project = project
 
-  $scope.create = (begin_date, end_date) ->
+  Sprint.query project_id: project_id, (sprints) ->
+    $scope.sprints = sprints
+
+  $scope.createSprint = (begin_date, end_date) ->
     Sprint.save project_id: project_id, begin_date: begin_date, end_date: end_date, (sprint) ->
       $scope.sprints.push sprint
 
-  $scope.delete = (index) ->
-    Sprint.delete project_id: project_id, sprint_id: $scope.sprints[index].id, () ->
-      $scope.sprints.splice index, 1
+  $scope.deleteSprint = (id) ->
+    Sprint.delete project_id: project_id, sprint_id: id, () ->
+      $scope.sprints = (s for s in $scope.sprints when s.id != id)

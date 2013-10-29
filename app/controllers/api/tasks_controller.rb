@@ -42,7 +42,7 @@ class Api::TasksController < ApplicationController
 private
 
   def set_story()
-    @story = Sprint.find(params[:story_id])
+    @story = Story.find(params[:story_id])
   end
 
   def set_task()
@@ -50,7 +50,7 @@ private
   end
 
   def task_params
-    params.require(:story).permit(:description, :label, :status)
+    params.require(:task).permit(:description, :label, :status)
   end
 
 end

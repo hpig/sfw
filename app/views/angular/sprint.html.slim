@@ -1,4 +1,36 @@
+form.well ng-submit="createStory(name, description, points)"
+  .row
+    .col-md-3.input-group
+      span.input-group-addon Name
+      input.form-control[ng-model="name" type="text" required]
+    .col-md-5.input-group
+      span.input-group-addon Description
+      textarea.form-control[ng-model="description" required]
+    .col-md-2.input-group
+      span.input-group-addon Points
+      input.form-control[ng-model="points" ng-init="points=1" type="number" required]
+    .col-md-2.input-group
+      button.btn.btn-primary type="submit" Add Story
+
 .row
   .col-md-4
-    .well
-      input
+  .col-md-2
+    h3 not-started
+  .col-md-2
+    h3 in-progess
+  .col-md-2
+    h3 in-review
+  .col-md-2
+    h3 done
+
+div ng-repeat="story in stories | orderBy:'name'"
+  .row
+    .col-md-4
+      .well
+        h2
+          | {{story.name}}
+        p
+          | {{story.description}}
+
+    .col-md8
+      div ng-include="'/angular/story'" ng-controller="TasksCtrl" ng-init="initTask(story.id)"

@@ -42,7 +42,7 @@ class Api::StoriesController < ApplicationController
 private
 
   def set_sprint()
-    @sprint = Project.find(params[:sprint_id])
+    @sprint = Sprint.find(params[:sprint_id])
   end
 
   def set_story()
@@ -50,7 +50,7 @@ private
   end
 
   def story_params
-    params.require(:sprint).permit(:name, :description, :points)
+    params.require(:story).permit(:name, :description, :points)
   end
 
 end
