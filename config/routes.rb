@@ -20,7 +20,11 @@ Sfw::Application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :projects do
-      resources :sprints
+      resources :sprints do
+        resources :stories do
+          resources :tasks
+        end
+      end
     end
   end
 

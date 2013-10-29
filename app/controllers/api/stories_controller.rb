@@ -52,4 +52,5 @@ private
   def story_params
     params.require(:sprint).permit(:name, :description, :points)
   end
+
 end
