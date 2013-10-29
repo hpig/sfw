@@ -28,10 +28,11 @@ div ng-repeat="story in stories | orderBy:'name'"
     .row
       .col-md-4
         .well
-          h2
-            | {{story.name}}
+          h3
+            | {{story.name}} ({{story.points}} points)
           p
             | {{story.description}}
+          button.btn.btn-xs.btn-danger ng-click="deleteStory(story.id)" Delete
 
       .col-md8
         div ng-include="'/angular/story'" 

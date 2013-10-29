@@ -30,7 +30,7 @@ app.controller 'StoriesCtrl', @StoriesCtrl = ($scope, Sprint, Story) ->
 
   $scope.$watch 'showStories', () ->
     $scope.storiesTemplate = if $scope.showStories then '/angular/sprint' else ''
-    $scope.showHide = if $scope.showStories then 'Hide' else 'Show'
+    $scope.showHide = if $scope.showStories then 'Hide Stories' else 'Show Stories'
 
   $scope.toggleVisible = () ->
     $scope.showStories = !$scope.showStories
