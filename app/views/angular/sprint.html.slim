@@ -24,13 +24,14 @@ form.well ng-submit="createStory(name, description, points)"
     h3 done
 
 div ng-repeat="story in stories | orderBy:'name'"
-  .row
-    .col-md-4
-      .well
-        h2
-          | {{story.name}}
-        p
-          | {{story.description}}
+  div ng-controller="TasksCtrl" ng-init="initTask(story.id)"
+    .row
+      .col-md-4
+        .well
+          h2
+            | {{story.name}}
+          p
+            | {{story.description}}
 
-    .col-md8
-      div ng-include="'/angular/story'" ng-controller="TasksCtrl" ng-init="initTask(story.id)"
+      .col-md8
+        div ng-include="'/angular/story'" 

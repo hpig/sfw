@@ -24,4 +24,13 @@ app.controller 'StoriesCtrl', @StoriesCtrl = ($scope, Sprint, Story) ->
       project_id: $scope.project.id,
       sprint_id: $scope.sprint.id,
       story_id: id, () ->
-        $scope.sprints = (s for s in $scope.sprints when s.id != id)
+        $scope.stories = (s for s in $scope.stories when s.id != id)
+
+  $scope.showStories = false
+
+  $scope.$watch 'showStories', () ->
+    $scope.storiesTemplate = if $scope.showStories then '/angular/sprint' else ''
+    $scope.showHide = if $scope.showStories then 'Hide' else 'Show'
+
+  $scope.toggleVisible = () ->
+    $scope.showStories = !$scope.showStories

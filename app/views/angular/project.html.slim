@@ -15,16 +15,18 @@ form.well ng-submit="createSprint(begin_date, end_date)"
       button.btn.btn-primary type="submit" Add Sprint
 
 .well ng-repeat="sprint in sprints | orderBy:'begin_date'"
-  .row
-    .col-md-1
-      a href="/#/projects/{{project.id}}/{{sprint.id}}" Show
-    .col-md-3.input-group
-      span.input-group-addon Begin
-      input.form-control[type="date" value="{{sprint.begin_date}}" required]
-    .col-md-3.input-group
-      span.input-group-addon End
-      input.form-control[type="date" value="{{sprint.end_date}}" required]
-    .col-md-5
-      button.btn.btn-xs.btn-danger.pull-right ng-click="deleteSprint(sprint.id)" Delete
+  div ng-controller="StoriesCtrl" ng-init="initStory(sprint.id)"
+    .row
+      .col-md-1
+        button.btn.btn-sm.btn-success href="/#/projects/{{project.id}}/{{sprint.id}}" ng-click="toggleVisible()"
+          | {{showHide}}
+      .col-md-3.input-group
+        span.input-group-addon Begin
+        input.form-control[type="date" value="{{sprint.begin_date}}" required]
+      .col-md-3.input-group
+        span.input-group-addon End
+        input.form-control[type="date" value="{{sprint.end_date}}" required]
+      .col-md-5
+        button.btn.btn-xs.btn-danger.pull-right ng-click="deleteSprint(sprint.id)" Delete
 
-  div ng-include="'/angular/sprint'" ng-controller="StoriesCtrl" ng-init="initStory(sprint.id)"
+    div ng-include="storiesTemplate"
