@@ -25,4 +25,5 @@ form.well ng-submit="createStory(name, description, points)"
     h3 done
 
 div ng-repeat="story in stories | orderBy:'name'"
+  hr
   div ng-controller="TasksCtrl" ng-init="initStory(story.id)" ng-include="'/angular/story'"

@@ -10,6 +10,6 @@
   form ng-submit="saveTask(status)"
     .row
       .col-md-8
-        select.form-control[ng-model="status" ng-options="s for s in statusOptions" required]
+        select.form-control[ng-model="status" ng-options="s for s in statusOptions"]
       .col-md-4
-        button.btn.btn-primary type="submit" Move
+        button.btn.btn-primary.btn-xs type="submit" Move
