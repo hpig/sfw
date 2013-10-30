@@ -5,7 +5,7 @@ app.factory 'Story', ($resource) ->
             project_id: '@project_id', sprint_id: '@sprint_id', story_id: '@id'
 
 app.controller 'StoriesCtrl', @StoriesCtrl = ($scope, Sprint, Story) ->
-  $scope.initStory = (sprint_id) ->
+  $scope.initSprint = (sprint_id) ->
     Sprint.get project_id: $scope.project.id, sprint_id: sprint_id, (sprint) ->
       $scope.sprint = sprint
 

@@ -1,5 +1,43 @@
 .row
-  .col-md-3
-  .col-md-3
-  .col-md-3
-  .col-md-3
+  .col-md-4
+    .well
+      h3
+        | {{story.name}} ({{story.points}} points)
+      p
+        | {{story.description}}
+      button.btn.btn-xs.btn-danger ng-click="deleteStory(story.id)" Delete
+
+      form ng-submit="createTask(label, descr)"
+        span.input-group-addon Description
+        textarea.form-control[ng-model="descr" required]
+        .row
+          .col-md-6.input-group
+            select.form-control[ng-model="label" required]
+              option preparation
+              option research
+              option design
+              option front-end
+              option back-end
+              option testing
+          .col-md-6.input-group
+            button.btn.btn-primary type="submit" Add Task
+
+  / not-started
+  .col-md-2
+    div ng-repeat="task in tasks | filter: { status: 'not-started' } | orderBy:'description'"
+      .panel.panel-default ng-controller="TaskCtrl" ng-init="initTask(task.id)" ng-include="'/angular/task'"
+
+  / in-progress
+  .col-md-2
+    div ng-repeat="task in tasks | filter: { status: 'in-progress' } | orderBy:'description'"
+      .panel.panel-default ng-controller="TaskCtrl" ng-init="initTask(task.id)" ng-include="'/angular/task'"
+
+  / in-review
+  .col-md-2
+    div ng-repeat="task in tasks | filter: { status: 'in-review' } | orderBy:'description'"
+      .panel.panel-default ng-controller="TaskCtrl" ng-init="initTask(task.id)" ng-include="'/angular/task'"
+
+  / done
+  .col-md-2
+    div ng-repeat="task in tasks | filter: { status: 'done' } | orderBy:'description'"
+      .panel.panel-default ng-controller="TaskCtrl" ng-init="initTask(task.id)" ng-include="'/angular/task'"

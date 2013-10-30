@@ -14,6 +14,7 @@ form.well ng-submit="createStory(name, description, points)"
 
 .row
   .col-md-4
+    h3 Stories
   .col-md-2
     h3 not-started
   .col-md-2
@@ -24,15 +25,4 @@ form.well ng-submit="createStory(name, description, points)"
     h3 done
 
 div ng-repeat="story in stories | orderBy:'name'"
-  div ng-controller="TasksCtrl" ng-init="initTask(story.id)"
-    .row
-      .col-md-4
-        .well
-          h3
-            | {{story.name}} ({{story.points}} points)
-          p
-            | {{story.description}}
-          button.btn.btn-xs.btn-danger ng-click="deleteStory(story.id)" Delete
-
-      .col-md8
-        div ng-include="'/angular/story'" 
+  div ng-controller="TasksCtrl" ng-init="initStory(story.id)" ng-include="'/angular/story'"

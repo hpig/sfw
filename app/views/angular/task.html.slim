@@ -1,0 +1,15 @@
+.panel-heading
+  span.label.label-default
+    | {{task.label}}
+  button.btn.btn-xs.btn-danger.pull-right ng-click="deleteTask(task.id)" Delete
+
+.panel-body
+  | {{task.description}}
+
+.panel-footer
+  form ng-submit="saveTask(status)"
+    .row
+      .col-md-8
+        select.form-control[ng-model="status" ng-options="s for s in statusOptions" required]
+      .col-md-4
+        button.btn.btn-primary type="submit" Move
