@@ -1,5 +1,6 @@
-SfW
 ===
+SfW
+
 An exercise in Rails + AngularJS through a RESTful API
 
 Stuff that made life easier for this project:
